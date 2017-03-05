@@ -1,0 +1,60 @@
+Linux下添加FTP账号和服务器、增加密码和用户，更改FTP目录
+
+1、 启动VSFTP服务器
+A:cenos下运行:yum  install  vsftpd
+
+
+B. 登录Linux主机后，运行命令：”service vsftpd start”
+
+C. 要让FTP每次开机自动启动，运行命令:  “chkconfig --level 35 vsftpd on”
+
+
+
+2、设置FTP权限
+
+A. 编辑VSFTP配置文件，运行命令：”vi /etc/vsftpd/vsftpd.conf “
+
+B. 将配置文件中”anonymous_enable=YES “改为 “anonymous_enable=NO”
+
+C. 保存修改，按ESC键，运行命令：“：wq”
+
+
+这样关闭了匿名登录功能。
+
+
+
+3、添加FTP账号
+
+A. 登录Linux主机后，运行命令：”useradd ftpadmin -s /sbin/nologin “。该账户路径默认指向/home/ftpadmin目录；如果需要将用户指向其他目录，请运行命令：useradd ftpadmin -s /sbin/nologin –d /www(其他目录)
+
+B. 设置ftpadmin用户密码，运行命令：”passwd ftpadmin” ; 输入两次密码，匹配成功后，就设置好了ftpadmin用户的密码了。
+
+C.测试连接，您可以在“我的电脑”地址栏中输入 ftp://IP 来连接FTP服务器，根据提示输入账户密码。
+
+
+
+4、FTP数据传输注意事项﻿
+
+A. 尽量把文件打包后上传。Linux无法识别RAR压缩包，可以使用ZIP压缩。
+
+B.上传数据时请选择二进制编码，如果选择其他编码，可能会导致上传的压缩包无法打开。
+
+
+
+
+centos FTP 用户指定目录禁用上级目录
+
+在默认配置下，本地用户登入FTP后可以使用cd命令切换到其他目录，这样会对系统带来安全隐患。可以通过以下三条配置文件来控制用户切换目录。
+chroot_list_enable=YES/NO（NO）
+设置是否启用chroot_list_file配置项指定的用户列表文件。默认值为NO。
+chroot_list_file=/etc/vsftpd.chroot_list
+用于指定用户列表文件，该文件用于控制哪些用户可以切换到用户家目录的上级目录。
+chroot_local_user=YES/NO（NO）
+用于指定用户列表文件中的用户是否允许切换到上级目录。默认值为NO。
+通过搭配能实现以下几种效果：
+①当chroot_list_enable=YES，chroot_local_user=YES时，在/etc/vsftpd.chroot_list文件中列出的用户，可以切换到其他目录；未在文件中列出的用户，不能切换到其他目录。
+②当chroot_list_enable=YES，chroot_local_user=NO时，在/etc/vsftpd.chroot_list文件中列出的用户，不能切换到其他目录；未在文件中列出的用户，可以切换到其他目录。
+③当chroot_list_enable=NO，chroot_local_user=YES时，所有的用户均不能切换到其他目录。
+④当chroot_list_enable=NO，chroot_local_user=NO时，所有的用户均可以切换到其他目录。
+
+

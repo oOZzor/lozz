@@ -1,0 +1,19 @@
+Clone failed: Could not read from remote repository.
+
+从远程 git 仓库克隆项目到本地  出现
+
+
+clone failed. Could not read from remote repository".
+
+
+解决办法
+
+
+Check the following setting:
+
+Settings -> Version Control -> Git -> SSH Executable
+
+If it's set to Built-in switch to Native and give it a try.
+
+Make sure you have the files id_rsa and id_rsa.pub stored in the correct location as well.
+
