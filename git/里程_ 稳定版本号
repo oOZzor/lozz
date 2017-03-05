@@ -1,0 +1,13 @@
+里程碑 = 稳定版本号.
+里程碑的含义是: 一个阶段比较稳定的版本,正式提交发布出去.提供zip下载.
+
+操作步骤:
+1. 在github网站上.进入项目首页.
+2. 横栏按钮(commits, branches, release等),找到release按钮.
+3. 找到按钮:draft a new release,点击进入下一页面.
+4. 填入版本号,以及说明信息.
+5. 完成后,点击publish release,将软件发布出去.
+6. 这样就完成里程碑建立,同时会自动生成zip下载链接.
+
+建立里程碑
+Release-->Draft a new release
