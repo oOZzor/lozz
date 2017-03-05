@@ -1,0 +1,56 @@
+我们可以通过 Composer 镜像安装 composer ，
+
+在这之前，请确认您的机器上已经安装了PHP，并可以通过php来执行命令。
+如果您的服务器上必须通过全路径来执行（/usr/local/php/bin/php），您可以通过以下命令，来改变：
+
+cp /usr/local/php/bin/php  /usr/sbin/
+
+这样，你就可以通过“php”来执行了。
+
+一、局部安装
+
+局部安装是将 composer 安装到当前目录下面（比如安装到项目根目录下），然后就可以通过 php composer.phar 来使用 composer 了。
+
+Mac 或 Linux 系统：打开命令行窗口并执行如下命令：
+
+curl -sS http://install.phpcomposer.com/installer | php
+Windows 系统（Mac 或 Linux 系统也可以使用）：请执行如下命令：
+
+php -r "readfile('http://install.phpcomposer.com/installer');" | php
+
+
+
+二、全局安装：
+
+全局安装是将 composer 安装到系统环境变量 PATH 所包含的路径下面，然后就能够在命令行窗口中直接执行 composer 命令了。
+
+Mac 或 Linux 系统：打开命令行窗口并执行如下命令：
+
+ curl -sS http://install.phpcomposer.com/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+Windows 系统：请在命令行中执行如下命令：
+
+mkdir C:\bin
+
+cd C:\bin
+php -r "readfile('http://install.phpcomposer.com/installer');" | php
+echo @php "%~dp0composer.phar" %*>composer.bat
+上述命令执行成功之后再将 C:\bin 路径加入 PATH 环境变量即可。最后重新打开一个命令行窗口试一试执行 composer --version 看看是否正确输出版本号，例如：。
+
+ Composer version 1.0-dev (cd21505c8d58499a9b4d38573881cfec49c51ffd) 2016-01-27 13:04:22
+
+ 三、镜像说明：
+
+通过官方途径安装 composer 时，默认是通过 https 协议从 getcomposer.org 网站下载 composer.phar 文件，但是由于众所周知的原因，安装过程很痛苦。
+
+“Composer 中国镜像”是在 composer 源码的基础上重新编译 composer.phar 文件，并通过国内的 CDN 对下载进行加速。另外，为了保证使用最新版本的 composer ，
+开发者需要经常执行 composer selfupdate命令来更新 composer，所以，我们将 composer 的更新源也替换成了本镜像，这样就能让整个 composer 的使用过程更舒心了！
+
+提示：不要忘了经常执行 composer selfupdate 以保持 composer 一直是最新版本哦！
+
+
+[root@localhost www]# composer selfupdate
+Cannot load Zend OPcache - it was already loaded
+Updating to version 1.3.2 (stable channel).
+    Downloading: 100%
+Use composer self-update --rollback to return to version 1.2.1
