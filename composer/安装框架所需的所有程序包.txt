@@ -1,0 +1,18 @@
+
+安装框架所需的所有程序包
+
+
+E:\GitHub\laravel\composer.json
+
+,
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+	
+	
+安装框架所需的所有程序包
+php ../composer.phar install	
+	

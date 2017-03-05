@@ -1,0 +1,35 @@
+
+
+
+
+启动apache遇到错误：httpd: Could not reliably determine the server's fully qualified domain name
+[root@server httpd-2.2.4]# /usr/local/apache/bin/apachectl start
+ 
+httpd: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1 for ServerName
+ 
+1）进入apache的安装目录：(视个人安装情况而不同) [root@server ~]# cd /usr/local/apache/conf
+ 
+2）编辑httpd.conf文件，搜索"#ServerName"，添加ServerName localhost:80
+[root@server conf]# ls
+extra  httpd.conf  magic  mime.types  original
+[root@server conf]# vi httpd.conf
+#ServerName www.example.com:80
+ServerName localhost:80
+3）再重新启动apache 即可。
+
+
+[root@localhost ~]# vim /etc/httpd/conf/httpd.conf
+[root@localhost ~]# /usr/sbin/apachectl
+(98)Address already in use: AH00072: make_sock: could not bind to address [::]:80
+(98)Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
+no listening sockets available, shutting down
+AH00015: Unable to open logs
+[root@localhost ~]# netstat -tulnp | grep ':80 '
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      2045/nginx: master  
+[root@localhost ~]# kill 2045
+[root@localhost ~]# /usr/sbin/apachectl
+[root@localhost ~]# 
+
+
+查看到对应哪个应用占用了80端口:
+netstat -tulnp | grep ':80 '
